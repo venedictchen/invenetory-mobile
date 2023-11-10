@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:invenetory_mobile/widgets/inventory_card.dart';
+import 'package:invenetory_mobile/widgets/left_drawer.dart';
+
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   final List<InventoryItem> items = [
-    InventoryItem("Lihat Item", Icons.inventory_rounded,Colors.pink),
-    InventoryItem("Tambah Item", Icons.add_box_rounded,Colors.yellow.shade800),
-    InventoryItem("Logout", Icons.logout,Colors.green.shade400),
+    InventoryItem("Lihat Item", Icons.inventory_rounded, Colors.pink),
+    InventoryItem("Tambah Item", Icons.add_box_rounded, Colors.yellow.shade800),
+    InventoryItem("Logout", Icons.logout, Colors.green.shade400),
   ];
 
   @override
@@ -20,11 +22,11 @@ class MyHomePage extends StatelessWidget {
             fontSize: 40,
             fontWeight: FontWeight.bold,
           ),
-          
         ),
-        
         backgroundColor: Colors.white,
+        foregroundColor: Colors.green,
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
@@ -65,4 +67,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
