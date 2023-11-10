@@ -54,16 +54,16 @@ class LeftDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Tambah Item'),
-            // Bagian redirection ke ShopFormPage
+            // Bagian redirection ke InventoryFormPage
             onTap: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const InventoryFormPage()));
             },
           ),
           ListTile(
-          leading: const Icon(Icons.add_shopping_cart),
+          leading: const Icon(Icons.inventory_rounded),
           title: const Text('Lihat Item'),
-          // Bagian redirection ke ShopFormPage
+          // Bagian redirection ke InventoryListPage
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => InventoryListPage()));

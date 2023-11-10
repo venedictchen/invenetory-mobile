@@ -15,16 +15,16 @@ class InventoryListPage extends StatelessWidget {
     ),
     Item(
       'Item 2',
-      5,
+      25,
       67890,
-      30,
-      'This is the description for item 2.wdadawdwdawdawdawdawdawdawdawdawdadawd',
+      50,
+      'This is the description for item 2',
     ),
     Item(
       'Item 3',
       15,
       11110,
-      20,
+      50,
       'This is the description for item 3.',
     ),
   ];
@@ -34,7 +34,7 @@ class InventoryListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Inventory',
+          'Invenetory',
           style: TextStyle(
             color: Colors.green,
             fontSize: 40,
@@ -51,7 +51,7 @@ class InventoryListPage extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
               child: Text(
-                'Inventory',
+                'Your Items',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
@@ -59,14 +59,16 @@ class InventoryListPage extends StatelessWidget {
                 ),
               ),
             ),
-            ListView(
-              shrinkWrap: true,
-              children: dummy.map((Item item) {
-              return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: InventoryItem(item),
-                );
-              }).toList(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListView(
+                shrinkWrap: true,
+                children: dummy.map((Item item) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: InventoryItem(item),
+                  );
+                }).toList(),
               ),
             ),
           ],

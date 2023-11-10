@@ -22,14 +22,18 @@ class _InventoryFormPageState extends State<InventoryFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Product Form',
+            'Add Item Form',
+            textAlign: TextAlign.center,
           ),
+          
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.grey,
       ),
       drawer: const LeftDrawer(),
-      body: Form(
+      body: Padding(
+      padding: const EdgeInsets.all(20.0), 
+      child: Form(
         key: _formKey,
         child: SingleChildScrollView(
           child: Column(
@@ -114,8 +118,8 @@ class _InventoryFormPageState extends State<InventoryFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Harga",
-                    labelText: "Harga",
+                    hintText: "Price",
+                    labelText: "Price",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -212,6 +216,7 @@ class _InventoryFormPageState extends State<InventoryFormPage> {
           ),
         ),
       ),
+    )
     );
   }
 }

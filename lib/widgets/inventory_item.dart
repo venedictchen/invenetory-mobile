@@ -35,7 +35,7 @@ class InventoryItem extends StatelessWidget {
             
             const Padding(padding: EdgeInsets.all(5)),
             Text(
-              'Amount: ${item.amount.toString()}',
+              'Jumlah: ${item.amount.toString()}',
               style: const TextStyle(color: Colors.black, fontSize: 12),
             ),
             const Padding(padding: EdgeInsets.all(1)),
@@ -46,7 +46,7 @@ class InventoryItem extends StatelessWidget {
             ),
             const Padding(padding: EdgeInsets.all(1)),
             Text(
-              'Harga: ${item.price.toString()}',
+              'Price: ${item.price.toString()}',
               style: const TextStyle(color: Colors.black, fontSize: 12),
               overflow: TextOverflow.ellipsis,
             ),
