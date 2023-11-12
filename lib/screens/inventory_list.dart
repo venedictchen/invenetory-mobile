@@ -3,7 +3,7 @@ import 'package:invenetory_mobile/widgets/left_drawer.dart';
 import 'package:invenetory_mobile/widgets/inventory_item.dart';
 
 class InventoryListPage extends StatelessWidget {
-  InventoryListPage({Key? key}) : super(key: key);
+  InventoryListPage({super.key});
 
   final List<Item> dummy = [
     Item(
