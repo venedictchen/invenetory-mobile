@@ -636,8 +636,117 @@ A new Mobile App.
     
     <details>
     <summary>Mengerjakan Bonus untuk Halaman List Item</summary>
+
+
+    1. Membuat static list di `inventory_item.dart` dan menambahkan ketika save di form.
+
+    ```dart
+    import 'package:flutter/material.dart';
+    class Item {
+      static final List<Item> dummy = [
+        Item(
+          'Item 1',
+          10,
+          12345,
+          50,
+          'This is the description for item 1.',
+        ),
+        Item(
+          'Item 2',
+          25,
+          67890,
+          50,
+          'This is the description for item 2',
+        ),
+        Item(
+          'Item 3',
+          15,
+          11110,
+          50,
+          'This is the description for item 3.',
+        ),
+      ];
+      final String name;
+      final int amount;
+      final int code;
+      final int price;
+      final String description;
+
+      Item(this.name, this.amount, this.code, this.price, this.description);
+    }
+
+    class InventoryItem extends StatelessWidget {
+      final Item item;
+
+      const InventoryItem(this.item, {super.key});
+
+      @override
+      Widget build(BuildContext context) {
+        return Material(
+          color: Colors.grey.shade100,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                
+                Text(
+                  item.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.black, fontSize: 24,fontWeight: FontWeight.bold),
+
+                  overflow: TextOverflow.ellipsis,
+                ),
+                
+                const Padding(padding: EdgeInsets.all(5)),
+                Text(
+                  'Jumlah: ${item.amount.toString()}',
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                ),
+                const Padding(padding: EdgeInsets.all(1)),
+                Text(
+                  'Code: ${item.code.toString()}',
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Padding(padding: EdgeInsets.all(1)),
+                Text(
+                  'Price: ${item.price.toString()}',
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Padding(padding: EdgeInsets.all(1)),
+                Text(
+                  item.description,
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Padding(padding: EdgeInsets.all(1)),
+              ],
+            ),
+          ),
+        );
+      }
+    }
+
     
-    1. Membuat halaman `inventory_list.dart` untuk menampilkan item-item yang ada untuk saat ini menggunakan model dummy 
+    ```
+    ```dart
+       onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            Item.dummy.add(Item(
+                _name, _amount, _code, _price, _description));
+            showDialog(
+              ...
+            )
+            ...
+          }
+       }
+    
+    
+    ```
+    2. Membuat halaman `inventory_list.dart` untuk menampilkan item-item yang ada untuk saat ini menggunakan model list sebelumnya.
 
         ```dart
         import 'package:flutter/material.dart';
@@ -645,31 +754,7 @@ A new Mobile App.
         import 'package:invenetory_mobile/widgets/inventory_item.dart';
 
         class InventoryListPage extends StatelessWidget {
-          InventoryListPage({Key? key}) : super(key: key);
-
-          final List<Item> dummy = [
-            Item(
-              'Item 1',
-              10,
-              12345,
-              50,
-              'This is the description for item 1.',
-            ),
-            Item(
-              'Item 2',
-              25,
-              67890,
-              50,
-              'This is the description for item 2',
-            ),
-            Item(
-              'Item 3',
-              15,
-              11110,
-              50,
-              'This is the description for item 3.',
-            ),
-          ];
+          const InventoryListPage({super.key});
 
           @override
           Widget build(BuildContext context) {
@@ -679,36 +764,42 @@ A new Mobile App.
                   'Inventory',
                   style: TextStyle(
                     color: Colors.green,
-                    fontSize: 40,
+                    fontSize: 20, 
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 backgroundColor: Colors.white,
               ),
               drawer: const LeftDrawer(),
-              body: Padding(
+              body: 
+              Padding(
                 padding: const EdgeInsets.all(10.0),
+                
                 child: Column(
                   children: <Widget>[
                     const Padding(
                       padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: Text(
-                        'Inventory',
+                        'Your Items',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 30, 
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    ListView(
-                      shrinkWrap: true,
-                      children: dummy.map((Item item) {
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0),
-                          child: InventoryItem(item),
-                        );
-                      }).toList(
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: ListView(
+                          shrinkWrap: true,
+                          children: Item.dummy.map((Item item) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10.0),
+                              child: InventoryItem(item),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ],
@@ -717,10 +808,11 @@ A new Mobile App.
             );
           }
         }
+
         
         ```
 
-    2. Membuat widget `inventory_item.dart` untuk card di halaman `invetory_list.dart` dan menambahkan `TextOverflow.Ellipsis` untuk kata yang terlalu panjang.
+    3. Membuat widget `inventory_item.dart` untuk card di halaman `invetory_list.dart` dan menambahkan `TextOverflow.Ellipsis` untuk kata yang terlalu panjang.
 
         ```dart
         import 'package:flutter/material.dart';
@@ -793,7 +885,7 @@ A new Mobile App.
         
         ```
 
-    3. Menambahkan navigasi di `left_drawer.dart`.
+    4. Menambahkan navigasi di `left_drawer.dart`.
 
         ```dart
         ...

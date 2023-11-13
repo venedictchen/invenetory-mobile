@@ -3,49 +3,27 @@ import 'package:invenetory_mobile/widgets/left_drawer.dart';
 import 'package:invenetory_mobile/widgets/inventory_item.dart';
 
 class InventoryListPage extends StatelessWidget {
-  InventoryListPage({super.key});
-
-  final List<Item> dummy = [
-    Item(
-      'Item 1',
-      10,
-      12345,
-      50,
-      'This is the description for item 1.',
-    ),
-    Item(
-      'Item 2',
-      25,
-      67890,
-      50,
-      'This is the description for item 2',
-    ),
-    Item(
-      'Item 3',
-      15,
-      11110,
-      50,
-      'This is the description for item 3.',
-    ),
-  ];
+  const InventoryListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Invenetory',
+          'Inventory',
           style: TextStyle(
             color: Colors.green,
-            fontSize: 40,
+            fontSize: 20, 
             fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
-      body: Padding(
+      body: 
+      Padding(
         padding: const EdgeInsets.all(10.0),
+        
         child: Column(
           children: <Widget>[
             const Padding(
@@ -54,21 +32,23 @@ class InventoryListPage extends StatelessWidget {
                 'Your Items',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 30, 
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListView(
-                shrinkWrap: true,
-                children: dummy.map((Item item) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: InventoryItem(item),
-                  );
-                }).toList(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: ListView(
+                  shrinkWrap: true,
+                  children: Item.dummy.map((Item item) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: InventoryItem(item),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ],
