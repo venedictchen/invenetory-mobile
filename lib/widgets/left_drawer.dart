@@ -74,7 +74,7 @@ class LeftDrawer extends StatelessWidget {
           // Bagian redirection ke InventoryListPage
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => InventoryListPage()));
+                MaterialPageRoute(builder: (context) => const InventoryListPage()));
           },
           ),
         ],

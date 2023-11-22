@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:invenetory_mobile/widgets/left_drawer.dart';
 import 'package:invenetory_mobile/models/item.dart';
-
+import 'package:invenetory_mobile/screens/item_page.dart';
 import 'package:http/http.dart' as http;
 
 class InventoryListPage extends StatefulWidget {
@@ -85,6 +85,16 @@ class _InventoryListPageState extends State<InventoryListPage> {
                                 Text("${snapshot.data![index].fields.code}"),
                                 const SizedBox(height: 10),
                                 Text("${snapshot.data![index].fields.price}"),
+                                const SizedBox(height: 10),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => ItemPage(
+                                                  snapshot.data![index])));
+                                    },
+                                    child: const Text("Detail"))
                               ],
                             ),
                           ));
