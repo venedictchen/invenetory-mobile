@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:invenetory_mobile/widgets/left_drawer.dart';
 import 'package:invenetory_mobile/models/item.dart';
 import 'package:invenetory_mobile/screens/item_page.dart';
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class InventoryListPage extends StatefulWidget {
   const InventoryListPage({Key? key}) : super(key: key);
@@ -14,35 +15,31 @@ class InventoryListPage extends StatefulWidget {
 }
 
 class _InventoryListPageState extends State<InventoryListPage> {
-  Future<List<Item>> fetchItem() async {
-    var url = Uri.parse('http://127.0.0.1:8000/json/');
-    var response = await http.get(
-      url,
-      headers: {"Content-Type": "application/json"},
-    );
+  Future<List<Item>> fetchItem(CookieRequest request) async {
+    final response = await request.get('http://127.0.0.1:8000/user_data/');
+    debugPrint(response.toString());
 
-    // melakukan decode response menjadi bentuk json
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    // melakukan konversi data json menjadi object Product
+
     List<Item> listItem = [];
-    for (var d in data) {
-      if (d != null) {
-        listItem.add(Item.fromJson(d));
-      }
+    for (var i in response) {
+      Item item = Item.fromJson(i);
+      listItem.add(item);
     }
+
     return listItem;
   }
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           title: const Text('List Item'),
         ),
         drawer: const LeftDrawer(),
         body: FutureBuilder(
-            future: fetchItem(),
+            future: fetchItem(request),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());

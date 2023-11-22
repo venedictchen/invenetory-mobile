@@ -1,5 +1,6 @@
 import 'package:invenetory_mobile/screens/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:invenetory_mobile/screens/register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -67,6 +68,25 @@ class _LoginPageState extends State<LoginPage> {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
 
+                if (username.isEmpty || password.isEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Login Gagal'),
+                      content: const Text(
+                          'Username dan Password tidak boleh kosong.'),
+                      actions: [
+                        TextButton(
+                          child: const Text('OK'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                  return;
+                }
                 // Cek kredensial
 
                 // Untuk menyambungkan Android emulator dengan Django pada localhost,
@@ -112,6 +132,16 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: const Text('Login'),
             ),
+            const SizedBox(height: 24.0),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterPage()),
+                  );
+                },
+                child: const Text('Register'))
           ],
         ),
       ),
