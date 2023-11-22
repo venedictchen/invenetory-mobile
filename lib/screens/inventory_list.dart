@@ -17,9 +17,6 @@ class InventoryListPage extends StatefulWidget {
 class _InventoryListPageState extends State<InventoryListPage> {
   Future<List<Item>> fetchItem(CookieRequest request) async {
     final response = await request.get('http://127.0.0.1:8000/user_data/');
-    debugPrint(response.toString());
-
-
 
     List<Item> listItem = [];
     for (var i in response) {
